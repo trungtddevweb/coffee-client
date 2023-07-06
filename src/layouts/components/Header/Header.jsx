@@ -1,28 +1,10 @@
-// import PropTypes from 'prop-types'
-
 import { Button, FormControlLabel } from '@mui/material'
 import { useColorScheme } from '@mui/material/styles'
 import { Link, useNavigate } from 'react-router-dom'
-
 import { styled } from '@mui/material/styles'
 import Switch from '@mui/material/Switch'
-import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutSuccess } from '@/redux/userSlice'
-
-function ModeToggle() {
-    const { mode, setMode } = useColorScheme()
-    return (
-        <Button
-            onClick={() => {
-                setMode(mode === 'light' ? 'dark' : 'light')
-            }}
-        >
-            {mode === 'light' ? 'Turn dark' : 'Turn light'}
-        </Button>
-    )
-}
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -77,7 +59,7 @@ const Header = () => {
     const checkLoggedIn = useSelector((state) => state.auth.isLoggedIn)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const handleLoggout = async () => {
+    const handleLogout = async () => {
         dispatch(logoutSuccess())
         navigate('/sign-in')
     }
@@ -94,7 +76,7 @@ const Header = () => {
             />
             <Link to="/sign-in">
                 {checkLoggedIn ? (
-                    <Button onClick={handleLoggout}>Đăng xuất</Button>
+                    <Button onClick={handleLogout}>Đăng xuất</Button>
                 ) : (
                     <Button variant="contained">Đăng nhập</Button>
                 )}
@@ -102,7 +84,5 @@ const Header = () => {
         </header>
     )
 }
-
-// Header.propTypes = {}
 
 export default Header
