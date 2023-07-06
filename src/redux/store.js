@@ -10,7 +10,7 @@ const rootReducer = combineReducers({ auth: userSlice })
 const persistConfig = {
     key: 'root',
     version: '1',
-    storage
+    storage,
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -18,7 +18,6 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
     reducer: persistedReducer,
     middleware: [thunk],
-    devTools: import.meta.NODE_ENV !== 'production'
 })
 
 export const persistor = persistStore(store)

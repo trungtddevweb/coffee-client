@@ -15,16 +15,8 @@ const router = createBrowserRouter([
         errorElement: <Error />,
         children: [
             {
-                index: true,
+                path: '/',
                 element: <Home />,
-            },
-            {
-                path: 'invoices',
-                element: <div>Invoices</div>,
-            },
-            {
-                path: 'contact',
-                element: <div>Contact</div>,
             },
         ],
     },
@@ -33,11 +25,11 @@ const router = createBrowserRouter([
         errorElement: <Error />,
         children: [
             {
-                path: 'sign-up',
+                path: '/sign-up',
                 element: <SignUp />,
             },
             {
-                path: 'sign-in',
+                path: '/sign-in',
                 element: <SignIn />,
             },
         ],
@@ -47,8 +39,8 @@ const router = createBrowserRouter([
         errorElement: <Error />,
         children: [
             {
-                path: 'manager/:username',
-                element: <div>Quản lý</div>,
+                path: '/manager/:username',
+                element: <Home />,
             },
         ],
     },
