@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 
 import AuthLayout from '@/layouts/AuthLayout'
 import MainLayout from '@/layouts/MainLayout'
+import ProtectedLayout from '@/layouts/ProtectedLayout'
 
 import Error from '@/pages/Error'
 import Home from '@/pages/Home'
@@ -10,7 +11,6 @@ import SignIn from '@/pages/SignIn'
 
 const router = createBrowserRouter([
     {
-        path: '/',
         element: <MainLayout />,
         errorElement: <Error />,
         children: [
@@ -39,6 +39,16 @@ const router = createBrowserRouter([
             {
                 path: 'sign-in',
                 element: <SignIn />,
+            },
+        ],
+    },
+    {
+        element: <ProtectedLayout />,
+        errorElement: <Error />,
+        children: [
+            {
+                path: 'manager/:username',
+                element: <div>Quản lý</div>,
             },
         ],
     },

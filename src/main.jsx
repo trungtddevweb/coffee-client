@@ -19,16 +19,16 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-                <ErrorBoundary FallbackComponent={Fallback}>
-                    <CssVarsProvider theme={theme}>
-                        <GoogleOAuthProvider clientId={clientId}>
-                            <Suspense fallback={<SpinnerAnimation />}>
+                <Suspense fallback={<SpinnerAnimation />}>
+                    <ErrorBoundary FallbackComponent={Fallback}>
+                        <CssVarsProvider theme={theme}>
+                            <GoogleOAuthProvider clientId={clientId}>
                                 <CssBaseline />
                                 <App />
-                            </Suspense>
-                        </GoogleOAuthProvider>
-                    </CssVarsProvider>
-                </ErrorBoundary>
+                            </GoogleOAuthProvider>
+                        </CssVarsProvider>
+                    </ErrorBoundary>
+                </Suspense>
             </PersistGate>
         </Provider>
     </React.StrictMode>
