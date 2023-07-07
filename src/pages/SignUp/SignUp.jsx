@@ -158,7 +158,6 @@ const SignUp = () => {
                                                         render={({ field }) => (
                                                             <TextField
                                                                 required
-                                                                autoFocus
                                                                 type="number"
                                                                 autoComplete="tel"
                                                                 error={
@@ -191,7 +190,6 @@ const SignUp = () => {
                                                 name="email"
                                                 render={({ field }) => (
                                                     <TextField
-                                                        autoFocus
                                                         error={errors.email}
                                                         label="Email"
                                                         type="email"
@@ -215,7 +213,6 @@ const SignUp = () => {
                                                 name="password"
                                                 render={({ field }) => (
                                                     <TextField
-                                                        autoFocus
                                                         error={errors.password}
                                                         label="Mật khẩu"
                                                         type="password"
@@ -266,6 +263,7 @@ const SignUp = () => {
                                             component="span"
                                             marginLeft={1}
                                             color="primary"
+                                            className="hover:underline hover:text-cyan-900"
                                         >
                                             Đăng nhập ngay
                                         </Typography>

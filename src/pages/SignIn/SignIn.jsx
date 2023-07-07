@@ -218,7 +218,7 @@ const SignIn = () => {
                                             component="span"
                                             marginLeft={1}
                                             color="primary"
-                                            className="hover:underline"
+                                            className="hover:underline hover:text-cyan-900"
                                         >
                                             Tạo mới ngay!
                                         </Typography>
