@@ -4,10 +4,7 @@ import AuthLayout from '@/layouts/AuthLayout'
 import MainLayout from '@/layouts/MainLayout'
 import ProtectedLayout from '@/layouts/ProtectedLayout'
 
-import Error from '@/pages/Error'
-import Home from '@/pages/Home'
-import SignUp from '@/pages/SignUp'
-import SignIn from '@/pages/SignIn'
+import { Error, Home, SignIn, SignUp } from './const'
 
 const router = createBrowserRouter([
     {
@@ -16,6 +13,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
+                index: true,
                 element: <Home />,
             },
         ],
@@ -25,11 +23,11 @@ const router = createBrowserRouter([
         errorElement: <Error />,
         children: [
             {
-                path: '/sign-up',
+                path: 'sign-up',
                 element: <SignUp />,
             },
             {
-                path: '/sign-in',
+                path: 'sign-in',
                 element: <SignIn />,
             },
         ],
@@ -39,7 +37,7 @@ const router = createBrowserRouter([
         errorElement: <Error />,
         children: [
             {
-                path: '/manager/:username',
+                path: 'manager/:username',
                 element: <Home />,
             },
         ],

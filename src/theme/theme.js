@@ -6,7 +6,8 @@ const theme = extendTheme({
         light: {
             palette: {
                 primary: {
-                    main: orange[900],
+                    main: orange[700],
+                    contrastText: '#ffffff',
                 },
                 input: {
                     main: blue[900],

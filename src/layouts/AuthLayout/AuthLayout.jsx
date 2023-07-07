@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
 
@@ -6,7 +7,11 @@ const AuthLayout = () => {
 
     if (checkLoggedIn) return <Navigate to="/" replace />
 
-    return <Outlet />
+    return (
+        <Box className="bg-auth bg-gray-900/60 bg-blend-overlay">
+            <Outlet />
+        </Box>
+    )
 }
 
 export default AuthLayout

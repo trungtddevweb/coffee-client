@@ -1,6 +1,5 @@
 import {
     Box,
-    Button,
     Checkbox,
     Divider,
     FormControl,
@@ -12,6 +11,7 @@ import {
     TextField,
     Typography,
 } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
 import { Controller, useForm } from 'react-hook-form'
 import { object, string } from 'yup'
 import { Link } from 'react-router-dom'
@@ -20,46 +20,69 @@ import Image from 'mui-image'
 import jwtDecode from 'jwt-decode'
 import { GoogleLogin } from '@react-oauth/google'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useState } from 'react'
 
 import logo from '@/assets/images/logo.png'
 import loginBg from '@/assets/images/bg-login.jpg'
 import { loginSuccess } from '@/redux/userSlice'
 import TypeErrorMsg from '@/components/common/TypeErrorMsg'
 import { ErrorMessage } from '@hookform/error-message'
+import axios from 'axios'
 
 const SignIn = () => {
     const dispatch = useDispatch()
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
+
     const defaultValues = {
         email: '',
         password: '',
     }
     const userSchema = object({
         email: string()
-            .email('Email phải có dạng example@abc.xyz')
-            .required('Email không được để trống'),
-        password: string().min(6, 'Mật khẩu phải chứa ít nhất 6 kí tự'),
+            .email('Phải có dạng example@abc.xyz')
+            .required('Không được để trống'),
+        password: string().min(6, 'Phải có ít nhất 6 kí tự'),
     })
 
     const {
         handleSubmit,
         control,
-        formState: { errors, isDirty },
+        formState: { errors },
     } = useForm({
         defaultValues,
         resolver: yupResolver(userSchema),
     })
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+        try {
+            setLoading(true)
+            const response = await axios.post(
+                'https://ecomerce-shopping.onrender.com/api/auth/login',
+                data
+            )
+            dispatch(loginSuccess(response))
+        } catch (error) {
+            setError(error?.message)
+        } finally {
+            setLoading(false)
+        }
     }
 
-    const onLoginGgSuccess = (credentialResponse) => {
-        const decode = jwtDecode(credentialResponse.credential)
-        dispatch(loginSuccess(decode))
+    const onLoginGgSuccess = async (credentialResponse) => {
+        try {
+            setLoading(true)
+            const decode = await jwtDecode(credentialResponse.credential)
+            dispatch(loginSuccess(decode))
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
-        <Box className="h-screen bg-blue-100 flex items-center justify-center">
+        <Box className="h-screen flex items-center justify-center">
             <Paper className="w-10/12 h-[80vh]" elevation={4}>
                 <Grid
                     container
@@ -89,7 +112,8 @@ const SignIn = () => {
                                     Chào mừng trở lại!
                                 </Typography>
                                 <Stack className="items-center" spacing={2}>
-                                    <Stack spacing={3}>
+                                    <Stack spacing={2}>
+                                        <TypeErrorMsg message={error} />
                                         <FormControl>
                                             <Controller
                                                 control={control}
@@ -155,19 +179,19 @@ const SignIn = () => {
                                         </FormGroup>
                                         <Typography
                                             variant="subtitle2"
-                                            color="blue"
+                                            color="primary"
                                         >
                                             Quên mật khẩu
                                         </Typography>
                                     </Stack>
-                                    <Button
+                                    <LoadingButton
+                                        loading={loading}
                                         className="w-[400px]"
                                         variant="contained"
                                         type="submit"
-                                        disabled={!isDirty}
                                     >
-                                        Đăng nhập
-                                    </Button>
+                                        Đăng nhâp
+                                    </LoadingButton>
                                     <Divider className="w-[400px]">
                                         hoặc
                                     </Divider>
@@ -193,7 +217,8 @@ const SignIn = () => {
                                             variant="subtitle2"
                                             component="span"
                                             marginLeft={1}
-                                            color="blue"
+                                            color="primary"
+                                            className="hover:underline"
                                         >
                                             Tạo mới ngay!
                                         </Typography>

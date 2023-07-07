@@ -4,8 +4,9 @@ import thunk from 'redux-thunk'
 import storage from 'redux-persist/lib/storage'
 
 import userSlice from './userSlice'
+import toastSlice from './toastSlice'
 
-const rootReducer = combineReducers({ auth: userSlice })
+const rootReducer = combineReducers({ auth: userSlice, toast: toastSlice })
 
 const persistConfig = {
     key: 'root',
@@ -18,6 +19,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
     reducer: persistedReducer,
     middleware: [thunk],
+    devTools: import.meta.NODE_ENV !== 'production',
 })
 
 export const persistor = persistStore(store)

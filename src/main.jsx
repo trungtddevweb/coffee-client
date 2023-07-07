@@ -7,6 +7,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 import { CssBaseline } from '@mui/material'
 import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles'
 import { GoogleOAuthProvider } from '@react-oauth/google'
+import { ToastContainer } from 'react-toastify'
 
 import './index.css'
 import App from './App'
@@ -25,6 +26,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                             <GoogleOAuthProvider clientId={clientId}>
                                 <CssBaseline />
                                 <App />
+                                <ToastContainer />
                             </GoogleOAuthProvider>
                         </CssVarsProvider>
                     </ErrorBoundary>

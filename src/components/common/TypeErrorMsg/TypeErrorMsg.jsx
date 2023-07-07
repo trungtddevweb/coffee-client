@@ -3,7 +3,7 @@ import { Typography } from '@mui/material'
 
 const TypeErrorMsg = ({ message }) => {
     return (
-        <Typography color="error" variant="subtitle2" fontStyle="italic">
+        <Typography color="error" variant="subtitle2">
             {message}
         </Typography>
     )

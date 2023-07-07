@@ -1,6 +1,5 @@
 import {
     Box,
-    Button,
     Divider,
     FormControl,
     Grid,
@@ -9,6 +8,7 @@ import {
     TextField,
     Typography,
 } from '@mui/material'
+import { useState } from 'react'
 import { loginSuccess } from '@/redux/userSlice'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { GoogleLogin } from '@react-oauth/google'
@@ -23,29 +23,34 @@ import { ErrorMessage } from '@hookform/error-message'
 import logo from '@/assets/images/logo.png'
 import loginBg from '@/assets/images/bg-register.jpg'
 import TypeErrorMsg from '@/components/common/TypeErrorMsg'
+import { LoadingButton } from '@mui/lab'
 
 const SignUp = () => {
     const dispatch = useDispatch()
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
     const defaultValues = {
         name: '',
         email: '',
+        phone: '',
         password: '',
     }
     const userSchema = object({
         name: string()
-            .min(1, 'Tên phải chứa ít nhất 1 kí tự!')
-            .max(24, 'Tên chỉ được phép tối đa 24 kí tự!'),
-        email: string().email().required('Email không được để trống!'),
+            .min(1, 'Phải có ít nhất 1 kí tự!')
+            .required('Không được để trống!')
+            .max(24, 'Chỉ được phép tối đa 24 kí tự!'),
+        email: string().email().required('Không được để trống!'),
         password: string()
-            .required('Mật khẩu không được để trống')
-            .min(6, 'Mật khẩu phải chứa ít nhất 6 kí tự!')
-            .max(24, 'Mật khẩu chỉ được phép tối đa 24 kí tự!'),
+            .required('Không được để trống')
+            .min(6, 'Phải có ít nhất 6 kí tự!')
+            .max(24, 'Chỉ được phép tối đa 24 kí tự!'),
     })
 
     const {
         handleSubmit,
         control,
-        formState: { errors, isDirty },
+        formState: { errors },
     } = useForm({
         defaultValues,
         resolver: yupResolver(userSchema),
@@ -55,13 +60,20 @@ const SignUp = () => {
         console.log(data)
     }
 
-    const onLoginGgSuccess = (credentialResponse) => {
-        const decode = jwtDecode(credentialResponse.credential)
-        dispatch(loginSuccess(decode))
+    const onLoginGgSuccess = async (credentialResponse) => {
+        try {
+            setLoading(true)
+            const decode = await jwtDecode(credentialResponse.credential)
+            dispatch(loginSuccess(decode))
+        } catch (error) {
+            setError(error)
+        } finally {
+            setLoading(false)
+        }
     }
 
     return (
-        <Box className="h-screen bg-blue-100 flex items-center justify-center">
+        <Box className="h-screen flex items-center justify-center">
             <Paper className="w-10/12 h-[80vh]" elevation={4}>
                 <Grid
                     container
@@ -101,32 +113,78 @@ const SignUp = () => {
                                     Đăng kí tài khoản
                                 </Typography>
                                 <Stack className="items-center" spacing={2}>
-                                    <Stack spacing={3} marginBottom={1}>
-                                        <FormControl>
-                                            <Controller
-                                                control={control}
-                                                name="name"
-                                                render={({ field }) => (
-                                                    <TextField
-                                                        autoFocus
-                                                        error={errors.name}
-                                                        label="Tên"
-                                                        className="w-[400px] "
-                                                        type="text"
-                                                        {...field}
+                                    <Typography className="w-full">
+                                        <TypeErrorMsg message={error} />
+                                    </Typography>
+                                    <Stack spacing={2} marginBottom={1}>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={6}>
+                                                <FormControl>
+                                                    <Controller
+                                                        control={control}
+                                                        name="name"
+                                                        render={({ field }) => (
+                                                            <TextField
+                                                                autoFocus
+                                                                error={
+                                                                    errors.name
+                                                                }
+                                                                label="Tên"
+                                                                type="text"
+                                                                {...field}
+                                                            />
+                                                        )}
                                                     />
-                                                )}
-                                            />
-                                            <ErrorMessage
-                                                errors={errors}
-                                                name="name"
-                                                render={({ message }) => (
-                                                    <TypeErrorMsg
-                                                        message={message}
+                                                    <ErrorMessage
+                                                        errors={errors}
+                                                        name="name"
+                                                        render={({
+                                                            message,
+                                                        }) => (
+                                                            <TypeErrorMsg
+                                                                message={
+                                                                    message
+                                                                }
+                                                            />
+                                                        )}
                                                     />
-                                                )}
-                                            />
-                                        </FormControl>
+                                                </FormControl>
+                                            </Grid>
+                                            <Grid item xs={6}>
+                                                <FormControl>
+                                                    <Controller
+                                                        control={control}
+                                                        name="phone"
+                                                        render={({ field }) => (
+                                                            <TextField
+                                                                required
+                                                                autoFocus
+                                                                type="number"
+                                                                autoComplete="tel"
+                                                                error={
+                                                                    errors.name
+                                                                }
+                                                                label="Số điện thoại"
+                                                                {...field}
+                                                            />
+                                                        )}
+                                                    />
+                                                    <ErrorMessage
+                                                        errors={errors}
+                                                        name="phone"
+                                                        render={({
+                                                            message,
+                                                        }) => (
+                                                            <TypeErrorMsg
+                                                                message={
+                                                                    message
+                                                                }
+                                                            />
+                                                        )}
+                                                    />
+                                                </FormControl>
+                                            </Grid>
+                                        </Grid>
                                         <FormControl>
                                             <Controller
                                                 control={control}
@@ -136,7 +194,6 @@ const SignUp = () => {
                                                         autoFocus
                                                         error={errors.email}
                                                         label="Email"
-                                                        className="w-[400px] "
                                                         type="email"
                                                         {...field}
                                                     />
@@ -159,9 +216,8 @@ const SignUp = () => {
                                                 render={({ field }) => (
                                                     <TextField
                                                         autoFocus
-                                                        error={errors.pass}
+                                                        error={errors.password}
                                                         label="Mật khẩu"
-                                                        className="w-[400px] "
                                                         type="password"
                                                         {...field}
                                                     />
@@ -178,17 +234,15 @@ const SignUp = () => {
                                             />
                                         </FormControl>
                                     </Stack>
-                                    <Button
-                                        className="w-[400px]"
+                                    <LoadingButton
+                                        loading={loading}
+                                        fullWidth
                                         variant="contained"
                                         type="submit"
-                                        disabled={!isDirty}
                                     >
                                         Tạo tài khoản
-                                    </Button>
-                                    <Divider className="w-[400px]">
-                                        hoặc
-                                    </Divider>
+                                    </LoadingButton>
+                                    <Divider variant="fullWidth">hoặc</Divider>
                                 </Stack>
                                 <Stack alignItems="center" marginTop={2}>
                                     <GoogleLogin
@@ -211,7 +265,7 @@ const SignUp = () => {
                                             variant="subtitle2"
                                             component="span"
                                             marginLeft={1}
-                                            color="blue"
+                                            color="primary"
                                         >
                                             Đăng nhập ngay
                                         </Typography>
