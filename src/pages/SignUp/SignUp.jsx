@@ -1,11 +1,7 @@
 import {
     Box,
-    Checkbox,
     Divider,
     FormControl,
-    FormControlLabel,
-    FormGroup,
-    Grid,
     Paper,
     Stack,
     TextField,
@@ -131,7 +127,7 @@ const SignUp = () => {
                                 align="center"
                                 variant="h6"
                                 gutterBottom
-                                paddingY={4}
+                                paddingY={2}
                                 color="primary"
                             >
                                 Đăng kí tài khoản
@@ -257,7 +253,7 @@ const SignUp = () => {
                                 align="center"
                                 variant="subtitle2"
                                 component="div"
-                                marginTop={10}
+                                marginTop={3}
                             >
                                 Đã có tài khoản!
                                 <Link to="/sign-in">

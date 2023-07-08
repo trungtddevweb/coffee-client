@@ -126,7 +126,7 @@ const SignIn = () => {
                                 align="center"
                                 variant="h6"
                                 gutterBottom
-                                paddingY={4}
+                                paddingY={2}
                                 color="primary"
                             >
                                 Chào mừng trở lại!
@@ -225,7 +225,7 @@ const SignIn = () => {
                                 align="center"
                                 variant="subtitle2"
                                 component="div"
-                                marginTop={10}
+                                marginTop={3}
                             >
                                 Chưa có tài khoản!
                                 <Link to="/sign-up">
