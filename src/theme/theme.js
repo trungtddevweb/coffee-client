@@ -1,5 +1,5 @@
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
-import { deepOrange, blue } from '@mui/material/colors'
+import { deepOrange, blue, grey } from '@mui/material/colors'
 
 const theme = extendTheme({
     colorSchemes: {
@@ -18,6 +18,9 @@ const theme = extendTheme({
             palette: {
                 primary: {
                     main: '#ffffff',
+                },
+                background: {
+                    default: grey[800],
                 },
             },
         },

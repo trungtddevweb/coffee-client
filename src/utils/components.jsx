@@ -3,6 +3,7 @@ import {
     Devices,
     Favorite,
     FlightTakeoff,
+    FoodBank,
     HistoryEdu,
     MusicNote,
     Whatshot,
@@ -11,37 +12,42 @@ import {
 export const navItems = [
     {
         label: 'Xu hướng',
-        slug: '/trending',
+        slug: '/tags/trending',
         icon: <Whatshot color="warning" />,
     },
     {
         label: 'Yêu thích',
-        slug: '/liked',
+        slug: '/tags/liked',
         icon: <Favorite color="error" />,
     },
     {
         label: 'Viết bài',
-        slug: '/write',
+        slug: '/tags/write',
         icon: <HistoryEdu color="info" />,
     },
     {
         label: 'Tâm sự',
-        slug: '/sharing',
+        slug: '/tags/sharing',
         icon: <ConnectWithoutContact color="error" />,
     },
     {
         label: 'Công nghệ',
-        slug: '/technology',
+        slug: '/tags/technology',
         icon: <Devices color="success" />,
     },
     {
         label: 'Âm nhạc',
-        slug: '/music',
+        slug: '/tags/music',
         icon: <MusicNote color="info" />,
     },
     {
         label: 'Du lịch',
-        slug: '/traveling',
+        slug: '/tags/traveling',
         icon: <FlightTakeoff color="primary" />,
+    },
+    {
+        label: 'Ẩm thực',
+        slug: '/tags/cuisine',
+        icon: <FoodBank color="success" />,
     },
 ]

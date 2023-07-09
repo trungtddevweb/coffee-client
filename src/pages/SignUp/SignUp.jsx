@@ -117,7 +117,7 @@ const SignUp = () => {
                         <Box
                             component="form"
                             sx={{
-                                marginTop: isMatch ? '36%' : '8%',
+                                marginTop: isMatch ? '22%' : '8%',
                                 flex: 1,
                                 padding: isMatch ? '10px' : '32px',
                             }}
@@ -144,7 +144,6 @@ const SignUp = () => {
                                             name="name"
                                             render={({ field }) => (
                                                 <TextField
-                                                    autoFocus
                                                     error={errors.name}
                                                     label="Tên"
                                                     type="text"

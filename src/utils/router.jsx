@@ -16,6 +16,14 @@ const router = createBrowserRouter([
                 index: true,
                 element: <Home />,
             },
+            {
+                path: 'tags',
+                element: <div>All tags</div>,
+            },
+            {
+                path: 'tags/:tagName',
+                element: <div>Tag Name</div>,
+            },
         ],
     },
     {

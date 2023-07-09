@@ -93,13 +93,13 @@ const SignIn = () => {
                         md: '80%',
                     },
                     height: {
-                        xs: '100vh',
+                        xs: '100%',
                         sm: '80vh',
                     },
                 }}
                 elevation={4}
             >
-                <Box className="h-full  relative overflow-hidden">
+                <Box className="h-full relative overflow-hidden">
                     <Link to="/">
                         <img
                             src={logo}
@@ -116,7 +116,7 @@ const SignIn = () => {
                         <Box
                             component="form"
                             sx={{
-                                marginTop: isMatch ? '36%' : '8%',
+                                marginTop: isMatch ? '22%' : '8%',
                                 flex: 1,
                                 padding: isMatch ? '10px' : '32px',
                             }}
@@ -140,7 +140,6 @@ const SignIn = () => {
                                             name="email"
                                             render={({ field }) => (
                                                 <TextField
-                                                    autoFocus
                                                     error={errors.email}
                                                     label="Email"
                                                     fullWidth

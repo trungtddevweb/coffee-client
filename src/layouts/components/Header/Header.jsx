@@ -1,45 +1,5 @@
-// import { Button, FormControlLabel } from '@mui/material'
-// import { useColorScheme } from '@mui/material/styles'
-// import { Link, useNavigate } from 'react-router-dom'
-// import { styled } from '@mui/material/styles'
-// import Switch from '@mui/material/Switch'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { logoutSuccess } from '@/redux/userSlice'
-
-// const Header = () => {
-//     const { mode, setMode } = useColorScheme()
-//     const checkLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-//     const dispatch = useDispatch()
-//     const navigate = useNavigate()
-//     const handleLogout = async () => {
-//         dispatch(logoutSuccess())
-//         navigate('/sign-in')
-//     }
-
-//     return (
-//         <header>
-//             <FormControlLabel
-//                 control={
-//                     <MaterialUISwitch sx={{ m: 1 }} checked={mode === 'dark'} />
-//                 }
-//                 onClick={() => {
-//                     setMode(mode === 'light' ? 'dark' : 'light')
-//                 }}
-//             />
-//             <Link to="/sign-in">
-//                 {checkLoggedIn ? (
-//                     <Button onClick={handleLogout}>Đăng xuất</Button>
-//                 ) : (
-//                     <Button variant="contained">Đăng nhập</Button>
-//                 )}
-//             </Link>
-//         </header>
-//     )
-// }
-
-// export default Header
 import PropTypes from 'prop-types'
-
+import { useState } from 'react'
 import {
     AppBar,
     Toolbar,
@@ -58,24 +18,23 @@ import {
     ListItemIcon,
     useColorScheme,
     Button,
-    FormControlLabel,
     Switch,
 } from '@mui/material'
-import { useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import MoreIcon from '@mui/icons-material/MoreVert'
-
-import { Search, SearchIconWrapper, StyledInputBase } from '@/assets/styles'
-import HideOnScroll from '../HideOnScroll'
-import { Home, Login, Logout } from '@mui/icons-material'
-import { Link } from 'react-router-dom'
-import { navItems } from '@/utils/components'
-import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
+import { Home, Logout } from '@mui/icons-material'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+
+import HideOnScroll from '../HideOnScroll'
+import { navItems } from '@/utils/components'
+import { Search, SearchIconWrapper, StyledInputBase } from '@/assets/styles'
+import { logoutSuccess } from '@/redux/userSlice'
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -133,6 +92,8 @@ export default function Header(props) {
     const checkLoggedIn = useSelector((state) => state.auth.isLoggedIn)
     const [mobileOpen, setMobileOpen] = useState(false)
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null)
@@ -146,77 +107,67 @@ export default function Header(props) {
         setMobileMoreAnchorEl(event.currentTarget)
     }
 
+    const handleLogout = async () => {
+        await dispatch(logoutSuccess())
+        navigate('/sign-in')
+    }
+
     const menuId = 'primary-search-account-menu'
 
     const mobileMenuId = 'primary-search-account-menu-mobile'
-    // const renderMobileMenu = (
-    //     <Menu
-    //         anchorEl={mobileMoreAnchorEl}
-    //         anchorOrigin={{
-    //             vertical: 'top',
-    //             horizontal: 'right',
-    //         }}
-    //         id={mobileMenuId}
-    //         keepMounted
-    //         transformOrigin={{
-    //             vertical: 'top',
-    //             horizontal: 'right',
-    //         }}
-    //         open={isMobileMenuOpen}
-    //         onClose={handleMobileMenuClose}
-    //     >
-    //         {checkLoggedIn ? (
-    //             <Box>
-    //                 <Box>
-    //                     <FormControlLabel
-    //                         control={
-    //                             <MaterialUISwitch
-    //                                 sx={{ m: 1 }}
-    //                                 checked={mode === 'dark'}
-    //                             />
-    //                         }
-    //                         onClick={() => {
-    //                             setMode(mode === 'light' ? 'dark' : 'light')
-    //                         }}
-    //                     />
-    //                 </Box>
-    //                 <MenuItem>
-    //                     <IconButton
-    //                         aria-label="show new notifications"
-    //                         color="inherit"
-    //                     >
-    //                         <Badge badgeContent={17} color="error" max={9}>
-    //                             <NotificationsIcon color="info" />
-    //                         </Badge>
-    //                     </IconButton>
-    //                     <p>Thông báo</p>
-    //                 </MenuItem>
-    //                 <MenuItem onClick={handleMenuClose}>
-    //                     <IconButton
-    //                         aria-label="account of current user"
-    //                         aria-controls="primary-search-account-menu"
-    //                         aria-haspopup="true"
-    //                         color="inherit"
-    //                     >
-    //                         <AccountCircle color="disabled" />
-    //                     </IconButton>
-    //                     <p>Tài khoản</p>
-    //                 </MenuItem>
-    //             </Box>
-    //         ) : (
-    //             <Box>
-    //                 <Link to="/sign-in">
-    //                     <MenuItem onClick={handleMenuClose}>
-    //                         <IconButton aria-label="login">
-    //                             <Login size="small" color="primary" />
-    //                         </IconButton>
-    //                         <Button color="primary">Đăng nhập</Button>
-    //                     </MenuItem>
-    //                 </Link>
-    //             </Box>
-    //         )}
-    //     </Menu>
-    // )
+    const renderMobileMenu = (
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            id={mobileMenuId}
+            keepMounted
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            open={isMobileMenuOpen}
+            onClose={handleMobileMenuClose}
+        >
+            <Box>
+                <MenuItem>
+                    <IconButton
+                        aria-label="show new notifications"
+                        color="inherit"
+                    >
+                        <Badge badgeContent={17} color="error" max={9}>
+                            <NotificationsIcon color="info" />
+                        </Badge>
+                    </IconButton>
+                    <p>Thông báo</p>
+                </MenuItem>
+                <MenuItem onClick={handleMenuClose}>
+                    <IconButton
+                        aria-label="account of current user"
+                        aria-controls="primary-search-account-menu"
+                        aria-haspopup="true"
+                        color="inherit"
+                    >
+                        <AccountCircle color="disabled" />
+                    </IconButton>
+                    <p>Tài khoản</p>
+                </MenuItem>
+                <MenuItem onClick={handleLogout}>
+                    <IconButton
+                        aria-label="show new notifications"
+                        color="inherit"
+                    >
+                        <Badge color="error">
+                            <Logout color="info" />
+                        </Badge>
+                    </IconButton>
+                    <p>Đăng xuất</p>
+                </MenuItem>
+            </Box>
+        </Menu>
+    )
 
     const handleDrawerToggle = () => {
         setMobileOpen((prevState) => !prevState)
@@ -256,16 +207,7 @@ export default function Header(props) {
                         </Link>
                     )
                 })}
-                {checkLoggedIn ? (
-                    <ListItem>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <Logout color="primary" />
-                            </ListItemIcon>
-                            <ListItemText primary="Đăng xuất" />
-                        </ListItemButton>
-                    </ListItem>
-                ) : (
+                {!checkLoggedIn && (
                     <ListItem>
                         <Link to="/sign-in">
                             <Button variant="contained">Đăng nhập</Button>
@@ -307,7 +249,7 @@ export default function Header(props) {
                                 <SearchIcon />
                             </SearchIconWrapper>
                             <StyledInputBase
-                                placeholder="Search…"
+                                placeholder="Tìm kiếm..."
                                 inputProps={{ 'aria-label': 'search' }}
                             />
                         </Search>
@@ -342,25 +284,29 @@ export default function Header(props) {
                                 <AccountCircle />
                             </IconButton>
                         </Box>
-                        {/* <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                            <IconButton
-                                size="large"
-                                aria-label="show more"
-                                aria-controls={mobileMenuId}
-                                aria-haspopup="true"
-                                onClick={handleMobileMenuOpen}
-                                color="inherit"
-                            >
-                                <MoreIcon />
-                            </IconButton>
-                        </Box> */}
+
                         <Box>
                             <MaterialUISwitch
                                 onClick={() => {
                                     setMode(mode === 'light' ? 'dark' : 'light')
                                 }}
+                                checked={mode === 'dark'}
                             />
                         </Box>
+                        {checkLoggedIn && (
+                            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                                <IconButton
+                                    size="large"
+                                    aria-label="show more"
+                                    aria-controls={mobileMenuId}
+                                    aria-haspopup="true"
+                                    onClick={handleMobileMenuOpen}
+                                    color="inherit"
+                                >
+                                    <MoreIcon />
+                                </IconButton>
+                            </Box>
+                        )}
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>
@@ -384,6 +330,7 @@ export default function Header(props) {
                     {drawer}
                 </Drawer>
             </Box>
+            {renderMobileMenu}
         </Box>
     )
 }
