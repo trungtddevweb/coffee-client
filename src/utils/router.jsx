@@ -4,7 +4,7 @@ import AuthLayout from '@/layouts/AuthLayout'
 import MainLayout from '@/layouts/MainLayout'
 import ProtectedLayout from '@/layouts/ProtectedLayout'
 
-import { Error, Home, SignIn, SignUp } from './const'
+import { Error, Home, SignIn, SignUp, TagName, DetailPost } from './const'
 
 const router = createBrowserRouter([
     {
@@ -22,7 +22,11 @@ const router = createBrowserRouter([
             },
             {
                 path: 'tags/:tagName',
-                element: <div>Tag Name</div>,
+                element: <TagName />,
+            },
+            {
+                path: 'tags/:tagName/:postId',
+                element: <DetailPost />,
             },
         ],
     },

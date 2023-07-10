@@ -1,3 +1,4 @@
+import { makeStyles, createStyles } from '@mui/styles'
 import { styled, alpha } from '@mui/material/styles'
 import { InputBase } from '@mui/material'
 
@@ -41,3 +42,28 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
         },
     },
 }))
+
+// UseStyles
+const useStyles = makeStyles(() =>
+    createStyles({
+        flexBox: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+        limitLines: {
+            display: '-webkit-box',
+            WebkitBoxOrient: 'vertical',
+            WebkitLineClamp: 3,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+        },
+        hoverItem: {
+            '&:hover': {
+                color: 'CurrentColor',
+            },
+        },
+    })
+)
+
+export default useStyles

@@ -1,4 +1,5 @@
 import {
+    AccessTime,
     ConnectWithoutContact,
     Devices,
     Favorite,
@@ -16,15 +17,16 @@ export const navItems = [
         icon: <Whatshot color="warning" />,
     },
     {
+        label: 'Gần đây',
+        slug: '/tags/recent',
+        icon: <AccessTime color="info" />,
+    },
+    {
         label: 'Yêu thích',
         slug: '/tags/liked',
         icon: <Favorite color="error" />,
     },
-    {
-        label: 'Viết bài',
-        slug: '/tags/write',
-        icon: <HistoryEdu color="info" />,
-    },
+
     {
         label: 'Tâm sự',
         slug: '/tags/sharing',
@@ -49,5 +51,10 @@ export const navItems = [
         label: 'Ẩm thực',
         slug: '/tags/cuisine',
         icon: <FoodBank color="success" />,
+    },
+    {
+        label: 'Viết bài',
+        slug: '/tags/write',
+        icon: <HistoryEdu color="info" />,
     },
 ]
