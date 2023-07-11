@@ -5,7 +5,6 @@ import MainLayout from '@/layouts/MainLayout'
 import ProtectedLayout from '@/layouts/ProtectedLayout'
 
 import { Error, Home, SignIn, SignUp, TagName, DetailPost } from './const'
-import Breadcrumbs from '@/components/common/Breadcumbs'
 
 const router = createBrowserRouter([
     {
@@ -45,7 +44,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: 'manager/:username',
-                element: <Home />,
+                element: <div>Setting</div>,
             },
         ],
     },
