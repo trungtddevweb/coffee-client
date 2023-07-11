@@ -1,4 +1,4 @@
-import { SpinnerAnimation } from '@/utils/const'
+import SpinnerAnimation from '@/components/fallback/Spinner/SpinnerAnimation'
 import { Box } from '@mui/material'
 import { Suspense } from 'react'
 import { useSelector } from 'react-redux'

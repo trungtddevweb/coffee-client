@@ -12,7 +12,7 @@ import {
 import { LoadingButton } from '@mui/lab'
 import { Controller, useForm } from 'react-hook-form'
 import { object, string } from 'yup'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import Image from 'mui-image'
 import jwtDecode from 'jwt-decode'
@@ -25,6 +25,7 @@ import loginBg from '@/assets/images/bg-login.jpg'
 import { loginSuccess } from '@/redux/userSlice'
 import TypeErrorMsg from '@/components/common/TypeErrorMsg'
 import { ErrorMessage } from '@hookform/error-message'
+import { signUpAPI } from '@/api/main'
 
 const SignUp = () => {
     const dispatch = useDispatch()
@@ -32,10 +33,11 @@ const SignUp = () => {
     const isMatch = useMediaQuery(theme.breakpoints.down('sm'))
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
+    const navigate = useNavigate()
+
     const defaultValues = {
         name: '',
         email: '',
-        phone: '',
         password: '',
     }
     const userSchema = object({
@@ -60,7 +62,17 @@ const SignUp = () => {
     })
 
     const onSubmit = async (data) => {
-        console.log(data)
+        try {
+            setLoading(true)
+            await signUpAPI(data)
+            setLoading(false)
+            // dispatch(showToast({ type: 'success', message: 'Đăng ký thành công!' }))
+            navigate('/sign-in')
+        } catch (err) {
+            setLoading(false)
+            console.log(err)
+            setError(err)
+        }
     }
 
     const onLoginGgSuccess = async (credentialResponse) => {
@@ -133,60 +145,27 @@ const SignUp = () => {
                                 Đăng kí tài khoản
                             </Typography>
                             <Stack spacing={2} marginBottom={1}>
-                                <Stack
-                                    direction="row"
-                                    spacing={2}
-                                    className="flex items-center justify-between"
-                                >
-                                    <FormControl sx={{ flex: 1 }}>
-                                        <Controller
-                                            control={control}
-                                            name="name"
-                                            render={({ field }) => (
-                                                <TextField
-                                                    error={errors.name}
-                                                    label="Tên"
-                                                    type="text"
-                                                    {...field}
-                                                />
-                                            )}
-                                        />
-                                        <ErrorMessage
-                                            errors={errors}
-                                            name="name"
-                                            render={({ message }) => (
-                                                <TypeErrorMsg
-                                                    message={message}
-                                                />
-                                            )}
-                                        />
-                                    </FormControl>
-                                    <FormControl sx={{ flex: 1 }}>
-                                        <Controller
-                                            control={control}
-                                            name="phone"
-                                            render={({ field }) => (
-                                                <TextField
-                                                    required
-                                                    type="number"
-                                                    autoComplete="tel"
-                                                    error={errors.name}
-                                                    label="Số điện thoại"
-                                                    {...field}
-                                                />
-                                            )}
-                                        />
-                                        <ErrorMessage
-                                            errors={errors}
-                                            name="phone"
-                                            render={({ message }) => (
-                                                <TypeErrorMsg
-                                                    message={message}
-                                                />
-                                            )}
-                                        />
-                                    </FormControl>
-                                </Stack>
+                                <FormControl sx={{ flex: 1 }}>
+                                    <Controller
+                                        control={control}
+                                        name="name"
+                                        render={({ field }) => (
+                                            <TextField
+                                                error={errors.name}
+                                                label="Tên"
+                                                type="text"
+                                                {...field}
+                                            />
+                                        )}
+                                    />
+                                    <ErrorMessage
+                                        errors={errors}
+                                        name="name"
+                                        render={({ message }) => (
+                                            <TypeErrorMsg message={message} />
+                                        )}
+                                    />
+                                </FormControl>
                                 <FormControl>
                                     <Controller
                                         control={control}

@@ -29,6 +29,7 @@ import { loginSuccess } from '@/redux/userSlice'
 import TypeErrorMsg from '@/components/common/TypeErrorMsg'
 import { ErrorMessage } from '@hookform/error-message'
 import axios from 'axios'
+import { loginAPI } from '@/api/main'
 
 const SignIn = () => {
     const dispatch = useDispatch()
@@ -60,13 +61,11 @@ const SignIn = () => {
     const onSubmit = async (data) => {
         try {
             setLoading(true)
-            const response = await axios.post(
-                'https://ecomerce-shopping.onrender.com/api/auth/login',
-                data
-            )
+            const response = await loginAPI(data)
+
             dispatch(loginSuccess(response))
         } catch (error) {
-            setError(error?.message)
+            setError(error.response.data)
         } finally {
             setLoading(false)
         }
