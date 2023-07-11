@@ -10,5 +10,8 @@ export const SignIn = lazy(() => import('@/pages/SignIn'))
 export const SignUp = lazy(() => import('@/pages/SignUp'))
 export const TagName = lazy(() => import('@/pages/TagName'))
 export const DetailPost = lazy(() => import('@/pages/DetailPost'))
+export const SpinnerAnimation = lazy(() =>
+    import('@/components/fallback/Spinner')
+)
 
 //

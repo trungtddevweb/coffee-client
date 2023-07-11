@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 
 const DetailPost = () => {
-    return <Box>DetailPost</Box>
+    return <Box>Details</Box>
 }
 
 export default DetailPost

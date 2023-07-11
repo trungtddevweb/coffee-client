@@ -11,17 +11,15 @@ import { ToastContainer } from 'react-toastify'
 
 import './index.css'
 import App from './App'
-import * as Fallback from '@/components/fallback/Spinner'
-import SpinnerAnimation from '@/components/fallback/Spinner'
 import theme from '@/theme/theme'
-import { clientId } from '@/utils/const'
+import { Error, SpinnerAnimation, clientId } from '@/utils/const'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
                 <Suspense fallback={<SpinnerAnimation />}>
-                    <ErrorBoundary FallbackComponent={Fallback}>
+                    <ErrorBoundary FallbackComponent={<Error />}>
                         <CssVarsProvider theme={theme}>
                             <GoogleOAuthProvider clientId={clientId}>
                                 <CssBaseline />

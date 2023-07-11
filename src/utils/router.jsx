@@ -5,20 +5,17 @@ import MainLayout from '@/layouts/MainLayout'
 import ProtectedLayout from '@/layouts/ProtectedLayout'
 
 import { Error, Home, SignIn, SignUp, TagName, DetailPost } from './const'
+import Breadcrumbs from '@/components/common/Breadcumbs'
 
 const router = createBrowserRouter([
     {
+        path: '/',
         element: <MainLayout />,
         errorElement: <Error />,
         children: [
             {
-                path: '/',
                 index: true,
                 element: <Home />,
-            },
-            {
-                path: 'tags',
-                element: <div>All tags</div>,
             },
             {
                 path: 'tags/:tagName',
@@ -32,7 +29,6 @@ const router = createBrowserRouter([
     },
     {
         element: <AuthLayout />,
-        errorElement: <Error />,
         children: [
             {
                 path: 'sign-up',
@@ -46,7 +42,6 @@ const router = createBrowserRouter([
     },
     {
         element: <ProtectedLayout />,
-        errorElement: <Error />,
         children: [
             {
                 path: 'manager/:username',

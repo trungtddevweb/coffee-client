@@ -1,7 +1,9 @@
+import { Suspense } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import SpinnerAnimation from '@/components/fallback/Spinner'
 
 const ProtectedLayout = () => {
     const checkLoggedIn = useSelector((state) => state.auth.isLoggedIn)
@@ -10,7 +12,11 @@ const ProtectedLayout = () => {
     return (
         <>
             <Header />
-            <Outlet />
+            <main className="mt-14 mb-4">
+                <Suspense fallback={<SpinnerAnimation />}>
+                    <Outlet />
+                </Suspense>
+            </main>
             <Footer />
         </>
     )

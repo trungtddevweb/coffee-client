@@ -108,7 +108,7 @@ export default function Header(props) {
     }
 
     const handleLogout = async () => {
-        await dispatch(logoutSuccess())
+        dispatch(logoutSuccess())
         navigate('/sign-in')
     }
 

@@ -1,17 +1,19 @@
 import { Outlet } from 'react-router-dom'
 import Header from '@/layouts/components/Header'
 import Footer from '@/layouts/components/Footer'
+import { Suspense } from 'react'
+import SpinnerAnimation from '@/components/fallback/Spinner/SpinnerAnimation'
 
-const MainLayout = () => {
+export default function MainLayout() {
     return (
         <>
             <Header />
             <main className="mt-14 mb-4">
-                <Outlet />
+                <Suspense fallback={<SpinnerAnimation />}>
+                    <Outlet />
+                </Suspense>
             </main>
             <Footer />
         </>
     )
 }
-
-export default MainLayout
