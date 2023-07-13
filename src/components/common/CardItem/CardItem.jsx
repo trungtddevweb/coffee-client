@@ -12,21 +12,15 @@ import useStyles from '@/assets/styles'
 
 const CardItem = ({ post }) => {
     const { tag, _id, content, imagesUrl, title } = post
+    const { name } = post.author
     const classes = useStyles()
     const navigate = useNavigate()
 
     const redirect = () => {
         navigate(`/tags/${tag}/${_id}`)
     }
-
     return (
-        <Card
-            onClick={redirect}
-            sx={{
-                minHeight: '370px',
-                maxHeight: '370px',
-            }}
-        >
+        <Card onClick={redirect}>
             <CardActionArea>
                 <CardMedia
                     component="img"
@@ -51,8 +45,17 @@ const CardItem = ({ post }) => {
                         color="text.secondary"
                         className={classes.limitLines}
                         paragraph
+                        textAlign="justify"
                     >
                         {content}
+                    </Typography>
+                    <Typography
+                        color="text.secondary"
+                        component="div"
+                        align="right"
+                        variant="caption"
+                    >
+                        {name}
                     </Typography>
                 </CardContent>
             </CardActionArea>

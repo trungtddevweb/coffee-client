@@ -13,17 +13,17 @@ import {
 export const navItems = [
     {
         label: 'Xu hướng',
-        slug: '/tags/trending',
+        slug: '/trending',
         icon: <Whatshot color="warning" />,
     },
     {
         label: 'Gần đây',
-        slug: '/tags/recent',
+        slug: '/recent',
         icon: <AccessTime color="info" />,
     },
     {
         label: 'Yêu thích',
-        slug: '/tags/liked',
+        slug: '/store/liked',
         icon: <Favorite color="error" />,
     },
 
@@ -54,7 +54,7 @@ export const navItems = [
     },
     {
         label: 'Viết bài',
-        slug: '/tags/write',
+        slug: '/write',
         icon: <HistoryEdu color="info" />,
     },
 ]

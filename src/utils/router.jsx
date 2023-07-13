@@ -4,7 +4,20 @@ import AuthLayout from '@/layouts/AuthLayout'
 import MainLayout from '@/layouts/MainLayout'
 import ProtectedLayout from '@/layouts/ProtectedLayout'
 
-import { Error, Home, SignIn, SignUp, TagName, DetailPost } from './const'
+import {
+    Error,
+    Home,
+    SignIn,
+    SignUp,
+    TagName,
+    DetailPost,
+    postLoader,
+    getRecentLoader,
+    Recent,
+    Trending,
+    Write,
+    Liked,
+} from './const'
 
 const router = createBrowserRouter([
     {
@@ -19,10 +32,20 @@ const router = createBrowserRouter([
             {
                 path: 'tags/:tagName',
                 element: <TagName />,
+                loader: postLoader,
             },
             {
                 path: 'tags/:tagName/:postId',
                 element: <DetailPost />,
+            },
+            {
+                path: 'trending',
+                element: <Trending />,
+            },
+            {
+                path: 'recent',
+                element: <Recent />,
+                loader: getRecentLoader,
             },
         ],
     },
@@ -45,6 +68,14 @@ const router = createBrowserRouter([
             {
                 path: 'manager/:username',
                 element: <div>Setting</div>,
+            },
+            {
+                path: 'store/liked',
+                element: <Liked />,
+            },
+            {
+                path: 'write',
+                element: <Write />,
             },
         ],
     },

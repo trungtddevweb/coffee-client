@@ -8,7 +8,7 @@ export default function MainLayout() {
     return (
         <>
             <Header />
-            <main className="mt-14 mb-4">
+            <main className="mt-14 mb-4 min-h-screen">
                 <Suspense fallback={<SpinnerAnimation />}>
                     <Outlet />
                 </Suspense>

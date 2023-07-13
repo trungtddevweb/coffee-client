@@ -39,3 +39,8 @@ export const getPostDetailAPI = async (postId) => {
     const res = await mainAPI.get(`/post/${postId}`)
     return res.data
 }
+
+export const getPostByTagAPI = async (tagName) => {
+    const res = await mainAPI.get(`/post/tag/${tagName}`)
+    return res.data
+}
