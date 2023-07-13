@@ -12,7 +12,7 @@ const RecentPosts = () => {
         const fetchPost = async () => {
             try {
                 const posts = await getAllPostAPI()
-                setPosts(posts)
+                setPosts(posts.data.docs)
                 setLoadig(false)
             } catch (error) {
                 console.log(error)
