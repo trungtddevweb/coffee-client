@@ -35,6 +35,7 @@ import HideOnScroll from '../HideOnScroll'
 import { navItems } from '@/utils/components'
 import { Search, SearchIconWrapper, StyledInputBase } from '@/assets/styles'
 import { logoutSuccess } from '@/redux/userSlice'
+import { signOutAPI } from '@/api/main'
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -90,6 +91,7 @@ export default function Header(props) {
     const { window } = props
     const { mode, setMode } = useColorScheme()
     const checkLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+    const accessToken = useSelector((state) => state.auth.user.accessToken)
     const [mobileOpen, setMobileOpen] = useState(false)
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
     const dispatch = useDispatch()
@@ -108,6 +110,7 @@ export default function Header(props) {
     }
 
     const handleLogout = async () => {
+        await signOutAPI(accessToken)
         dispatch(logoutSuccess())
         navigate('/sign-in')
     }

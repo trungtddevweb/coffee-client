@@ -1,13 +1,27 @@
+import { Fragment, useEffect, useState } from 'react'
 import { Box, Stack, Typography } from '@mui/material'
 import CardItem from '@/components/common/CardItem'
 import { Link } from 'react-router-dom'
-
-const post = {
-    tagName: 'trending',
-    _id: '12312312hhadsasdasd',
-}
+import { getAllPostAPI } from '@/api/main'
+import Skeleton from '@/components/fallback/Skeleton'
 
 const RecentPosts = () => {
+    const [posts, setPosts] = useState([])
+    const [loading, setLoadig] = useState(true)
+    useEffect(() => {
+        const fetchPost = async () => {
+            try {
+                const posts = await getAllPostAPI()
+                setPosts(posts)
+                setLoadig(false)
+            } catch (error) {
+                console.log(error)
+                setLoadig(false)
+            }
+        }
+        fetchPost()
+    }, [])
+
     return (
         <Box>
             <Typography
@@ -18,13 +32,21 @@ const RecentPosts = () => {
             >
                 Bài viết gần đây
             </Typography>
-            <Stack spacing={1}>
-                <CardItem post={post} />
-                <CardItem post={post} />
-                <CardItem post={post} />
-                <CardItem post={post} />
-                <CardItem post={post} />
-            </Stack>
+            {loading ? (
+                <Stack spacing={1}>
+                    <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
+                </Stack>
+            ) : (
+                <Stack spacing={1}>
+                    {posts.map((post) => (
+                        <CardItem key={post._id} post={post} />
+                    ))}
+                </Stack>
+            )}
             <Typography align="center" variant="subtitle2" mt={1} color="">
                 <Link to="/tags/recent">Xem thêm</Link>
             </Typography>

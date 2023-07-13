@@ -23,7 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                         <GoogleOAuthProvider clientId={clientId}>
                             <CssBaseline />
                             <App />
-                            <ToastContainer />
+                            <ToastContainer position="top-right" limit={5} />
                         </GoogleOAuthProvider>
                     </CssVarsProvider>
                 </ErrorBoundary>

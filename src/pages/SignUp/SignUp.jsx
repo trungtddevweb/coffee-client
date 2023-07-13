@@ -26,6 +26,7 @@ import { loginSuccess } from '@/redux/userSlice'
 import TypeErrorMsg from '@/components/common/TypeErrorMsg'
 import { ErrorMessage } from '@hookform/error-message'
 import { signUpAPI } from '@/api/main'
+import { showToast } from '@/redux/toastSlice'
 
 const SignUp = () => {
     const dispatch = useDispatch()
@@ -66,7 +67,9 @@ const SignUp = () => {
             setLoading(true)
             await signUpAPI(data)
             setLoading(false)
-            // dispatch(showToast({ type: 'success', message: 'Đăng ký thành công!' }))
+            dispatch(
+                showToast({ type: 'success', message: 'Đăng ký thành công!' })
+            )
             navigate('/sign-in')
         } catch (err) {
             setLoading(false)

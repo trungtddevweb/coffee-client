@@ -18,7 +18,6 @@ import { object, string } from 'yup'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import Image from 'mui-image'
-import jwtDecode from 'jwt-decode'
 import { GoogleLogin } from '@react-oauth/google'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
@@ -28,8 +27,7 @@ import loginBg from '@/assets/images/bg-login.jpg'
 import { loginSuccess } from '@/redux/userSlice'
 import TypeErrorMsg from '@/components/common/TypeErrorMsg'
 import { ErrorMessage } from '@hookform/error-message'
-import axios from 'axios'
-import { loginAPI } from '@/api/main'
+import { signInAPI, signInWithGoogleAPI } from '@/api/main'
 
 const SignIn = () => {
     const dispatch = useDispatch()
@@ -61,8 +59,7 @@ const SignIn = () => {
     const onSubmit = async (data) => {
         try {
             setLoading(true)
-            const response = await loginAPI(data)
-
+            const response = await signInAPI(data)
             dispatch(loginSuccess(response))
         } catch (error) {
             setError(error.response.data)
@@ -74,7 +71,9 @@ const SignIn = () => {
     const onLoginGgSuccess = async (credentialResponse) => {
         try {
             setLoading(true)
-            const decode = await jwtDecode(credentialResponse.credential)
+            const decode = await signInWithGoogleAPI(
+                credentialResponse.credential
+            )
             dispatch(loginSuccess(decode))
         } catch (error) {
             console.error(error)
@@ -212,7 +211,6 @@ const SignIn = () => {
                             </Stack>
                             <Stack alignItems="center" marginTop={2}>
                                 <GoogleLogin
-                                    useOneTap
                                     onSuccess={onLoginGgSuccess}
                                     onError={() => {
                                         console.log('Login Failed')

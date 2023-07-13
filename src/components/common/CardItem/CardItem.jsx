@@ -6,40 +6,53 @@ import {
     CardMedia,
     Typography,
 } from '@mui/material'
-import useStyles from '@/assets/styles'
 import { useNavigate } from 'react-router-dom'
 
+import useStyles from '@/assets/styles'
+
 const CardItem = ({ post }) => {
-    const { tagName, _id } = post
+    const { tag, _id, content, imagesUrl, title } = post
     const classes = useStyles()
     const navigate = useNavigate()
 
     const redirect = () => {
-        navigate(`/tags/${tagName}/${_id}`)
+        navigate(`/tags/${tag}/${_id}`)
     }
+
     return (
-        <Card onClick={redirect}>
+        <Card
+            onClick={redirect}
+            sx={{
+                minHeight: '370px',
+                maxHeight: '370px',
+            }}
+        >
             <CardActionArea>
                 <CardMedia
                     component="img"
                     height="140"
-                    image="/static/images/cards/contemplative-reptile.jpg"
-                    alt="green iguana"
+                    sx={{ maxHeight: '160px' }}
+                    image={imagesUrl}
+                    alt={title}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Lizard
+                    <Typography
+                        gutterBottom
+                        variant="h6"
+                        component="div"
+                        sx={{
+                            minHeight: '96px',
+                        }}
+                    >
+                        {title}
                     </Typography>
                     <Typography
                         variant="body2"
                         color="text.secondary"
                         className={classes.limitLines}
+                        paragraph
                     >
-                        Lizards are a widespread group of squamate reptiles,
-                        with over 6,000 species, ranging across all continents
-                        except Antarcticaizards are a widespread group of
-                        squamate reptiles, with over 6,000 species, ranging
-                        across all continents except Antarctica
+                        {content}
                     </Typography>
                 </CardContent>
             </CardActionArea>

@@ -12,3 +12,5 @@ export const TagName = lazy(() => import('@/pages/TagName'))
 export const DetailPost = lazy(() => import('@/pages/DetailPost'))
 //
 export const baseURL = import.meta.env.VITE_APP_BASE_URL
+
+// Loaders

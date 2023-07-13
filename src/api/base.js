@@ -4,6 +4,7 @@ import { baseURL } from '@/utils/const'
 const mainAPI = axios.create({
     baseURL,
     timeout: 10_000,
+    withCredentials: true,
 })
 
 export default mainAPI
