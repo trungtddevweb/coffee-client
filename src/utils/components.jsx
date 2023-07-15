@@ -22,12 +22,6 @@ export const navItems = [
         icon: <AccessTime color="info" />,
     },
     {
-        label: 'Yêu thích',
-        slug: '/store/liked',
-        icon: <Favorite color="error" />,
-    },
-
-    {
         label: 'Tâm sự',
         slug: '/tags/sharing',
         icon: <ConnectWithoutContact color="error" />,
@@ -51,6 +45,11 @@ export const navItems = [
         label: 'Ẩm thực',
         slug: '/tags/cuisine',
         icon: <FoodBank color="success" />,
+    },
+    {
+        label: 'Yêu thích',
+        slug: '/store/saved',
+        icon: <Favorite color="error" />,
     },
     {
         label: 'Viết bài',

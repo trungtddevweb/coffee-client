@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, ScrollRestoration } from 'react-router-dom'
 import Header from '@/layouts/components/Header'
 import Footer from '@/layouts/components/Footer'
 import { Suspense } from 'react'
@@ -14,6 +14,7 @@ export default function MainLayout() {
                 </Suspense>
             </main>
             <Footer />
+            <ScrollRestoration />
         </>
     )
 }

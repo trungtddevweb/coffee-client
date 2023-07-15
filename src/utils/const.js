@@ -1,4 +1,9 @@
-import { getAllPostAPI, getPostByTagAPI } from '@/api/main'
+import {
+    getAllPostAPI,
+    getPostByTagAPI,
+    getPostDetailAPI,
+    getPostTrendingAPI,
+} from '@/api/main'
 import { lazy } from 'react'
 
 export const clientId = import.meta.env.VITE_APP_CLIENTID_KEY
@@ -28,4 +33,12 @@ export const postLoader = async ({ params }) => {
 export const getRecentLoader = async () => {
     const post = await getAllPostAPI()
     return post
+}
+
+export const getTrendingLoader = async () => {
+    return await getPostTrendingAPI()
+}
+
+export const getDetailLoader = async ({ params }) => {
+    return await getPostDetailAPI(params.postId)
 }

@@ -34,9 +34,7 @@ const CardItem = ({ post }) => {
                         gutterBottom
                         variant="h6"
                         component="div"
-                        sx={{
-                            minHeight: '96px',
-                        }}
+                        className={classes.limitTitle}
                     >
                         {title}
                     </Typography>

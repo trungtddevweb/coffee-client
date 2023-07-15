@@ -6,21 +6,21 @@ const TagName = () => {
     const loader = useLoaderData()
     const posts = loader.data.docs
 
-    if (posts.length === 0) {
-        return (
-            <Box className="p-2">
-                <Typography variant="body1">Chưa có bài viết nào</Typography>
-            </Box>
-        )
-    }
-
     return (
         <Box className="p-2">
-            <Stack spacing={1}>
-                {posts.map((post) => (
-                    <CardItem key={post._id} post={post} />
-                ))}
-            </Stack>
+            {posts.length === 0 ? (
+                <Box className="p-2">
+                    <Typography variant="body1">
+                        Chưa có bài viết nào
+                    </Typography>
+                </Box>
+            ) : (
+                <Stack spacing={1}>
+                    {posts.map((post) => (
+                        <CardItem key={post._id} post={post} />
+                    ))}
+                </Stack>
+            )}
         </Box>
     )
 }

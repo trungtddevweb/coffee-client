@@ -17,6 +17,8 @@ import {
     Trending,
     Write,
     Liked,
+    getTrendingLoader,
+    getDetailLoader,
 } from './const'
 
 const router = createBrowserRouter([
@@ -37,10 +39,12 @@ const router = createBrowserRouter([
             {
                 path: 'tags/:tagName/:postId',
                 element: <DetailPost />,
+                loader: getDetailLoader,
             },
             {
                 path: 'trending',
                 element: <Trending />,
+                loader: getTrendingLoader,
             },
             {
                 path: 'recent',
@@ -70,7 +74,7 @@ const router = createBrowserRouter([
                 element: <div>Setting</div>,
             },
             {
-                path: 'store/liked',
+                path: 'store/saved',
                 element: <Liked />,
             },
             {

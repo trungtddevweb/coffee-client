@@ -2,7 +2,7 @@ import SpinnerAnimation from '@/components/fallback/Spinner/SpinnerAnimation'
 import { Box } from '@mui/material'
 import { Suspense } from 'react'
 import { useSelector } from 'react-redux'
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, ScrollRestoration } from 'react-router-dom'
 
 const AuthLayout = () => {
     const checkLoggedIn = useSelector((state) => state.auth.isLoggedIn)
@@ -14,6 +14,7 @@ const AuthLayout = () => {
             <Box className="bg-auth bg-gray-900/60 bg-blend-overlay">
                 <Outlet />
             </Box>
+            <ScrollRestoration />
         </Suspense>
     )
 }

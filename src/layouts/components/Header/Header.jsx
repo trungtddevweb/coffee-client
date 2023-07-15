@@ -36,6 +36,8 @@ import { navItems } from '@/utils/components'
 import { Search, SearchIconWrapper, StyledInputBase } from '@/assets/styles'
 import { logoutSuccess } from '@/redux/userSlice'
 import { signOutAPI } from '@/api/main'
+import { showToast } from '@/redux/toastSlice'
+import Backdrop from '@/components/common/Backdrop'
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -87,6 +89,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 export default function Header(props) {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
+    const [loading, setLoading] = useState(false)
     const drawerWidth = 240
     const { window } = props
     const { mode, setMode } = useColorScheme()
@@ -110,9 +113,19 @@ export default function Header(props) {
     }
 
     const handleLogout = async () => {
-        await signOutAPI(accessToken)
-        dispatch(logoutSuccess())
-        navigate('/sign-in')
+        handleMenuClose()
+        try {
+            setLoading(true)
+            await signOutAPI(accessToken)
+            dispatch(logoutSuccess())
+            navigate('/sign-in')
+            setLoading(true)
+        } catch (error) {
+            console.log(error)
+            setLoading(true)
+
+            dispatch(showToast({ type: 'error', error: error?.message }))
+        }
     }
 
     const menuId = 'primary-search-account-menu'
@@ -334,6 +347,7 @@ export default function Header(props) {
                 </Drawer>
             </Box>
             {renderMobileMenu}
+            <Backdrop open={loading} />
         </Box>
     )
 }

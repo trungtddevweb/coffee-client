@@ -63,6 +63,13 @@ const useStyles = makeStyles(() =>
                 color: 'CurrentColor',
             },
         },
+        limitTitle: {
+            display: '-webkit-box',
+            WebkitBoxOrient: 'vertical',
+            WebkitLineClamp: 2,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+        },
     })
 )
 

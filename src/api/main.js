@@ -36,11 +36,25 @@ export const getAllPostAPI = async () => {
 }
 
 export const getPostDetailAPI = async (postId) => {
-    const res = await mainAPI.get(`/post/${postId}`)
+    const res = await mainAPI.get(`/post/find/${postId}`)
     return res.data
 }
 
 export const getPostByTagAPI = async (tagName) => {
     const res = await mainAPI.get(`/post/tag/${tagName}`)
+    return res.data
+}
+
+export const getPostTrendingAPI = async () => {
+    const res = await mainAPI.get('/post/trending')
+    return res.data
+}
+
+export const getPostSavedAPI = async (accessToken) => {
+    const res = await mainAPI.get('/user/find/saved-post', {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    })
     return res.data
 }

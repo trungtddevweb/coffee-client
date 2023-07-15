@@ -13,20 +13,26 @@ import './index.css'
 import App from './App'
 import theme from '@/theme/theme'
 import { Error, clientId } from '@/utils/const'
+import { HelmetProvider } from 'react-helmet-async'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-                <ErrorBoundary FallbackComponent={<Error />}>
-                    <CssVarsProvider theme={theme}>
-                        <GoogleOAuthProvider clientId={clientId}>
-                            <CssBaseline />
-                            <App />
-                            <ToastContainer position="top-right" limit={5} />
-                        </GoogleOAuthProvider>
-                    </CssVarsProvider>
-                </ErrorBoundary>
+                <HelmetProvider>
+                    <ErrorBoundary FallbackComponent={<Error />}>
+                        <CssVarsProvider theme={theme}>
+                            <GoogleOAuthProvider clientId={clientId}>
+                                <CssBaseline />
+                                <App />
+                                <ToastContainer
+                                    position="top-right"
+                                    limit={5}
+                                />
+                            </GoogleOAuthProvider>
+                        </CssVarsProvider>
+                    </ErrorBoundary>
+                </HelmetProvider>
             </PersistGate>
         </Provider>
     </React.StrictMode>

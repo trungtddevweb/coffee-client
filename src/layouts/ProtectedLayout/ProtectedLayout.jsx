@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { useSelector } from 'react-redux'
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, ScrollRestoration } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import SpinnerAnimation from '@/components/fallback/Spinner'
@@ -12,12 +12,13 @@ const ProtectedLayout = () => {
     return (
         <>
             <Header />
-            <main className="mt-14 mb-4">
+            <main className="mt-14 mb-4 min-h-screen">
                 <Suspense fallback={<SpinnerAnimation />}>
                     <Outlet />
                 </Suspense>
             </main>
             <Footer />
+            <ScrollRestoration />
         </>
     )
 }
