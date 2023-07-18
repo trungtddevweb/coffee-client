@@ -15,7 +15,7 @@ import {
 import { LoadingButton } from '@mui/lab'
 import { Controller, useForm } from 'react-hook-form'
 import { object, string } from 'yup'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import Image from 'mui-image'
 import { GoogleLogin } from '@react-oauth/google'
@@ -36,7 +36,7 @@ const SignIn = () => {
     const [error, setError] = useState('')
     const theme = useTheme()
     const isMatch = useMediaQuery(theme.breakpoints.down('sm'))
-
+    const navigate = useNavigate()
     const defaultValues = {
         email: '',
         password: '',
@@ -62,6 +62,7 @@ const SignIn = () => {
             setLoading(true)
             const response = await signInAPI(data)
             dispatch(loginSuccess(response))
+            navigate(-1)
         } catch (error) {
             setError(error.response.data)
         } finally {
@@ -76,6 +77,7 @@ const SignIn = () => {
                 credentialResponse.credential
             )
             dispatch(loginSuccess(decode))
+            navigate(-1)
         } catch (error) {
             console.error(error)
         } finally {

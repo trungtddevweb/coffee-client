@@ -70,6 +70,10 @@ const useStyles = makeStyles(() =>
             overflow: 'hidden',
             textOverflow: 'ellipsis',
         },
+        breadcrumbs: {
+            fontSize: '12px',
+            fontWeight: 'bold',
+        },
     })
 )
 

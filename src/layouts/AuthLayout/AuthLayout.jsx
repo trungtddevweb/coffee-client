@@ -6,8 +6,9 @@ import { Navigate, Outlet, ScrollRestoration } from 'react-router-dom'
 
 const AuthLayout = () => {
     const checkLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+    const accessToken = useSelector((state) => state.auth.user.accessToken)
 
-    if (checkLoggedIn) return <Navigate to="/" replace />
+    if (checkLoggedIn && accessToken) return <Navigate to="/" replace />
 
     return (
         <Suspense fallback={<SpinnerAnimation />}>

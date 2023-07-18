@@ -58,3 +58,16 @@ export const getPostSavedAPI = async (accessToken) => {
     })
     return res.data
 }
+
+export const toggleLikePostAPI = async (postId, token) => {
+    const res = await mainAPI.post(
+        '/post/toggle-like',
+        { postId },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    )
+    return res.data
+}

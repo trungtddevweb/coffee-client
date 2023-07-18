@@ -6,7 +6,10 @@ import storage from 'redux-persist/lib/storage'
 import userSlice from './userSlice'
 import toastSlice from './toastSlice'
 
-const rootReducer = combineReducers({ auth: userSlice, toast: toastSlice })
+const rootReducer = combineReducers({
+    auth: userSlice,
+    toast: toastSlice,
+})
 
 const persistConfig = {
     key: 'root',

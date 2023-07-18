@@ -7,7 +7,9 @@ import SpinnerAnimation from '@/components/fallback/Spinner'
 
 const ProtectedLayout = () => {
     const checkLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-    if (!checkLoggedIn) return <Navigate to="/sign-in" replace />
+    const accessToken = useSelector((state) => state.auth.user.accessToken)
+    if (!checkLoggedIn || !accessToken)
+        return <Navigate to="/sign-in" replace />
 
     return (
         <>
