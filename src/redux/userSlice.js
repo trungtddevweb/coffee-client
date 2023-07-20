@@ -13,6 +13,7 @@ export const userSlice = createSlice({
         logoutSuccess: (state) => {
             state.user = {}
             state.isLoggedIn = false
+            state.postSaved = []
         },
         loginSuccess: (state, action) => {
             state.isLoggedIn = true
@@ -20,17 +21,11 @@ export const userSlice = createSlice({
             state.postSaved = action.payload.postsSaved
         },
         addSavedPosts: (state, action) => {
-            const postId = action.payload._id
-            const isPostSaved = state.postSaved.includes(postId)
-            if (isPostSaved) {
-                state.postSaved.filter((post) => post !== postId)
-            } else {
-                state.savedPosts.push(postId)
-            }
+            state.postSaved = action.payload.postsSaved
         },
     },
 })
 
-export const { logoutSuccess, loginSuccess } = userSlice.actions
+export const { logoutSuccess, loginSuccess, addSavedPosts } = userSlice.actions
 
 export default userSlice.reducer

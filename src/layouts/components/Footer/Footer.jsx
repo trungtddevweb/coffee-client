@@ -10,6 +10,7 @@ const Footer = () => {
                 textAlign="center"
                 bgcolor="GrayText"
                 py={1}
+                color="white"
             >
                 Mọi bản quyền thuộc về <Copyright />
                 <strong>Coffee Sweet</strong>. Develop by TranTrung!

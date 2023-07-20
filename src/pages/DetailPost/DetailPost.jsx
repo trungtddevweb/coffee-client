@@ -1,82 +1,33 @@
 import { Fragment, useState } from 'react'
-import {
-    Bookmark,
-    CalendarMonth,
-    Favorite,
-    FavoriteBorder,
-    KeyboardArrowUp,
-    Message,
-    Person2,
-} from '@mui/icons-material'
+import { CalendarMonth, KeyboardArrowUp, Person2 } from '@mui/icons-material'
 import {
     Box,
     Breadcrumbs,
     Divider,
     Fab,
-    IconButton,
     Link as LinkMUI,
     Stack,
     Typography,
 } from '@mui/material'
 import Image from 'mui-image'
-import { Link, useLoaderData, useNavigate, useParams } from 'react-router-dom'
+import { Link, useLoaderData, useParams } from 'react-router-dom'
 
 import ScrollToTop from '@/components/common/ScollToTop'
 import Seo from '@/components/feature/Seo'
-import { useSelector } from 'react-redux'
-import { toggleLikePostAPI } from '@/api/main'
 import { formatDate, formatTagNames } from '@/utils/format'
-import CustomDialog from '@/components/feature/CustomDialog'
 import useStyles from '@/assets/styles'
+import Action from './Action'
+import Comment from './Comment'
 
 const DetailPost = () => {
     const params = useParams()
     const loader = useLoaderData()
-    const userId = useSelector((state) => state.auth.user.userId)
-    const accessToken = useSelector((state) => state.auth.user.accessToken)
-    const navigate = useNavigate()
+    const [comments, setComments] = useState(loader.data.comments)
     const classes = useStyles()
-    const {
-        author,
-        comments,
-        content,
-        createdAt,
-        likes,
-        tag,
-        title,
-        imagesUrl,
-    } = loader.data
+    const { author, content, createdAt, tag, likes, title, imagesUrl } =
+        loader.data
 
     // State
-    const isLike = likes.includes(userId)
-    const [liked, setLiked] = useState(isLike)
-    const [like, setLike] = useState(likes)
-    const [open, setOpen] = useState(false)
-
-    const handleLike = async () => {
-        if (accessToken) {
-            try {
-                const res = await toggleLikePostAPI(params.postId, accessToken)
-                if (res.status === 'Success') {
-                    setLike(res.data.likes)
-                }
-                setLiked(!liked)
-            } catch (error) {
-                console.log(error)
-            }
-        } else {
-            setOpen(true)
-        }
-    }
-
-    // Modal
-    const handleClose = () => {
-        setOpen(false)
-    }
-
-    const onConfirm = () => {
-        navigate('/sign-in')
-    }
 
     return (
         <Fragment>
@@ -165,36 +116,16 @@ const DetailPost = () => {
                     </Box>
 
                     <Divider component="div" />
-                    <Box className="flex items-center justify-around">
-                        <Stack direction="row" alignItems="center">
-                            <IconButton onClick={handleLike}>
-                                {liked ? (
-                                    <Favorite color="error" />
-                                ) : (
-                                    <FavoriteBorder />
-                                )}
-                            </IconButton>
-                            <Typography variant="subtitle2">
-                                {like.length} lượt thích
-                            </Typography>
-                        </Stack>
-                        <Stack direction="row" alignItems="center">
-                            <IconButton onClick={handleLike}>
-                                <Message />
-                            </IconButton>
-                            <Typography variant="subtitle2">
-                                {comments.length} bình luận
-                            </Typography>
-                        </Stack>
-                        <Stack direction="row" alignItems="center">
-                            <IconButton onClick={handleLike}>
-                                <Bookmark />
-                            </IconButton>
-                            <Typography variant="subtitle2">
-                                Lưu bài viết
-                            </Typography>
-                        </Stack>
-                    </Box>
+                    <Action
+                        likes={likes}
+                        postId={params.postId}
+                        comments={comments}
+                    />
+                    <Comment
+                        comments={comments}
+                        postId={params.postId}
+                        setComments={setComments}
+                    />
                 </Box>
                 <ScrollToTop>
                     <Fab
@@ -206,11 +137,6 @@ const DetailPost = () => {
                     </Fab>
                 </ScrollToTop>
             </Box>
-            <CustomDialog
-                open={open}
-                onClose={handleClose}
-                onConfirm={onConfirm}
-            />
         </Fragment>
     )
 }

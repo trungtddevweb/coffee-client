@@ -8,6 +8,7 @@ import Skeleton from '@/components/fallback/Skeleton'
 const RecentPosts = () => {
     const [posts, setPosts] = useState([])
     const [loading, setLoadig] = useState(true)
+
     useEffect(() => {
         const fetchPost = async () => {
             try {

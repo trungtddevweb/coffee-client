@@ -71,3 +71,27 @@ export const toggleLikePostAPI = async (postId, token) => {
     )
     return res.data
 }
+
+// User
+export const addPostToSaveAPI = async (postId, token) => {
+    const res = await mainAPI.post(
+        '/user/saved-post',
+        { postId },
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    )
+    return res.data
+}
+
+// Comment
+export const createCommentAPI = async (data, token) => {
+    const res = await mainAPI.post('/comment/', data, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+    return res.data
+}

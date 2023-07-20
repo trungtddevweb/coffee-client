@@ -8,6 +8,7 @@ import { CssBaseline } from '@mui/material'
 import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 import { ToastContainer } from 'react-toastify'
+import('dayjs/locale/vi')
 
 import './index.css'
 import App from './App'

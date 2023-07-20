@@ -1,7 +1,7 @@
-import { Fragment } from 'react'
+import { Fragment, lazy } from 'react'
 import { Box } from '@mui/material'
 
-import RecentPosts from './RecentPosts'
+const RecentPosts = lazy(() => import('./RecentPosts'))
 import Seo from '@/components/feature/Seo'
 
 const Home = () => {
