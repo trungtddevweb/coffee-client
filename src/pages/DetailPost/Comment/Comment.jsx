@@ -27,7 +27,8 @@ const Comment = ({ comments, postId, setComments }) => {
     const [like, setLike] = useState(isLikedComment)
     const [commentVal, setCommentVal] = useState('')
     const handleLikeComment = () => {
-        setLike(!like)
+        // setLike(!like)
+        return null
     }
 
     const handleComment = async (e) => {
@@ -69,6 +70,7 @@ const Comment = ({ comments, postId, setComments }) => {
                                 variant="standard"
                                 value={commentVal}
                                 onChange={(e) => setCommentVal(e.target.value)}
+                                autoComplete="off"
                             />
                         </FormControl>
                     </Stack>

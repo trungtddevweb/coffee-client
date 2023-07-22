@@ -20,8 +20,85 @@ export const Trending = lazy(() => import('@/pages/Trending'))
 export const Write = lazy(() => import('@/pages/Write'))
 export const Liked = lazy(() => import('@/pages/Liked'))
 export const Recent = lazy(() => import('@/pages/Recent'))
+
+// Modules object for setting up the Quill editor
+function undoChange() {
+    this.quill.history.undo()
+}
+function redoChange() {
+    this.quill.history.redo()
+}
+
+export const modules = {
+    toolbar: {
+        container: '#toolbar',
+        handlers: {
+            undo: undoChange,
+            redo: redoChange,
+        },
+    },
+    history: {
+        delay: 500,
+        maxStack: 100,
+        userOnly: true,
+    },
+}
+
+// Formats objects for setting up the Quill editor
+// Undo and redo functions for Custom Toolbar
+
+export const formats = [
+    'header',
+    'font',
+    'size',
+    'bold',
+    'italic',
+    'underline',
+    'align',
+    'strike',
+    'script',
+    'blockquote',
+    'background',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'image',
+    'color',
+    'code-block',
+]
+
 //
-export const baseURL = import.meta.env.VITE_APP_BASE_URL
+export const listTags = [
+    {
+        label: 'Âm nhạc',
+        value: 'music',
+    },
+    {
+        label: 'Công nghệ',
+        value: 'technology',
+    },
+    {
+        label: 'Tâm sự',
+        value: 'sharing',
+    },
+    {
+        label: 'Du lịch',
+        value: 'traveling',
+    },
+    {
+        label: 'Ẩm thực',
+        value: 'cuisine',
+    },
+    {
+        label: 'Làm đẹp',
+        value: 'embellish',
+    },
+    {
+        label: 'Thời trang',
+        value: 'fashion',
+    },
+]
 
 // Loaders
 export const postLoader = async ({ params }) => {

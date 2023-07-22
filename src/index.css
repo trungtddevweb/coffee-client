@@ -59,3 +59,12 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
     -moz-appearance: textfield;
 }
+
+/* React-Quill */
+.ql-toolbar.ql-snow.active {
+    background-color: #dad6d6af;
+}
+
+.ql-editor {
+    height: 150px !important;
+}
