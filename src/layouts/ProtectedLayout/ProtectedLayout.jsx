@@ -14,7 +14,7 @@ const ProtectedLayout = () => {
     return (
         <>
             <Header />
-            <main className="mt-14 mb-4 min-h-screen">
+            <main className="mt-14 min-h-screen">
                 <Suspense fallback={<SpinnerAnimation />}>
                     <Outlet />
                 </Suspense>

@@ -27,17 +27,13 @@ import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import styled from '@emotion/styled'
-import { Home, Logout } from '@mui/icons-material'
-import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { Home } from '@mui/icons-material'
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import HideOnScroll from '../HideOnScroll'
 import { navItems } from '@/utils/components'
 import { Search, SearchIconWrapper, StyledInputBase } from '@/assets/styles'
-import { logoutSuccess } from '@/redux/userSlice'
-import { signOutAPI } from '@/api/main'
-import { showToast } from '@/redux/toastSlice'
-import Backdrop from '@/components/common/Backdrop'
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -89,16 +85,12 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 export default function Header(props) {
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null)
-    const [loading, setLoading] = useState(false)
     const drawerWidth = 240
     const { window } = props
     const { mode, setMode } = useColorScheme()
     const checkLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-    const accessToken = useSelector((state) => state.auth.user.accessToken)
     const [mobileOpen, setMobileOpen] = useState(false)
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null)
@@ -111,23 +103,6 @@ export default function Header(props) {
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget)
     }
-
-    const handleLogout = async () => {
-        handleMenuClose()
-        try {
-            setLoading(true)
-            await signOutAPI(accessToken)
-            dispatch(logoutSuccess())
-            navigate('/sign-in')
-            setLoading(true)
-        } catch (error) {
-            console.log(error)
-            setLoading(true)
-
-            dispatch(showToast({ type: 'error', error: error?.message }))
-        }
-    }
-
     const menuId = 'primary-search-account-menu'
 
     const mobileMenuId = 'primary-search-account-menu-mobile'
@@ -169,17 +144,6 @@ export default function Header(props) {
                         <AccountCircle color="disabled" />
                     </IconButton>
                     <p>Tài khoản</p>
-                </MenuItem>
-                <MenuItem onClick={handleLogout}>
-                    <IconButton
-                        aria-label="show new notifications"
-                        color="inherit"
-                    >
-                        <Badge color="error">
-                            <Logout color="info" />
-                        </Badge>
-                    </IconButton>
-                    <p>Đăng xuất</p>
                 </MenuItem>
             </Box>
         </Menu>
@@ -347,7 +311,6 @@ export default function Header(props) {
                 </Drawer>
             </Box>
             {renderMobileMenu}
-            <Backdrop open={loading} />
         </Box>
     )
 }

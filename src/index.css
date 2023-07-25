@@ -62,9 +62,10 @@ input[type='number'] {
 
 /* React-Quill */
 .ql-toolbar.ql-snow.active {
-    background-color: #dad6d6af;
+    background-color: #ffffff;
 }
 
 .ql-editor {
+    font-size: 16px; /* Set your desired default font size here */
     height: 150px !important;
 }

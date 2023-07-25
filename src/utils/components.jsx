@@ -2,11 +2,14 @@ import {
     AccessTime,
     ConnectWithoutContact,
     Devices,
-    Favorite,
+    FamilyRestroom,
     FlightTakeoff,
     FoodBank,
-    HistoryEdu,
+    LocalFlorist,
     MusicNote,
+    Notes,
+    Palette,
+    School,
     Whatshot,
 } from '@mui/icons-material'
 
@@ -47,13 +50,28 @@ export const navItems = [
         icon: <FoodBank color="success" />,
     },
     {
-        label: 'Yêu thích',
-        slug: '/store/saved',
-        icon: <Favorite color="error" />,
+        label: 'Nghệ Thuận',
+        slug: '/tags/art',
+        icon: <Palette color="warning" />,
     },
     {
-        label: 'Viết bài',
-        slug: '/write',
-        icon: <HistoryEdu color="info" />,
+        label: 'Thanh xuân',
+        slug: '/tags/youth',
+        icon: <LocalFlorist color="secondary" />,
+    },
+    {
+        label: 'Gia đình',
+        slug: '/tags/family',
+        icon: <FamilyRestroom color="error" />,
+    },
+    {
+        label: 'Học tập',
+        slug: '/tags/education',
+        icon: <School color="primary" />,
+    },
+    {
+        label: 'Khác',
+        slug: '/tags/other',
+        icon: <Notes color="info" />,
     },
 ]

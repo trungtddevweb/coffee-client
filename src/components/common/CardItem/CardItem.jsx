@@ -7,6 +7,7 @@ import {
     Typography,
 } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import HTMLReactParser from 'html-react-parser'
 
 import useStyles from '@/assets/styles'
 
@@ -40,12 +41,13 @@ const CardItem = ({ post }) => {
                     </Typography>
                     <Typography
                         variant="body2"
+                        component="div"
                         color="text.secondary"
                         className={classes.limitLines}
                         paragraph
                         textAlign="justify"
                     >
-                        {content}
+                        {HTMLReactParser(content)}
                     </Typography>
                     <Typography
                         color="text.secondary"

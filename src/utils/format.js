@@ -19,6 +19,8 @@ export function formatTagNames(tagName) {
             return 'Tâm sự'
         case 'traveling':
             return 'Du lịch'
+        case 'youth':
+            return 'Thanh xuân'
         default:
             return 'Chia sẻ'
     }

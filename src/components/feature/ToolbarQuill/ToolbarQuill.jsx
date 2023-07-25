@@ -54,7 +54,7 @@ export const QuillToolbar = () => {
     })
     return (
         <div id="toolbar" className={classNames}>
-            <span className="ql-formats">
+            {/* <span className="ql-formats">
                 <select className="ql-font" defaultValue="arial">
                     <option value="arial">Arial</option>
                     <option value="comic-sans">Comic Sans</option>
@@ -73,7 +73,7 @@ export const QuillToolbar = () => {
                     <option value="2">Subheading</option>
                     <option value="3">Normal</option>
                 </select>
-            </span>
+            </span> */}
             <span className="ql-formats">
                 <button className="ql-bold" />
                 <button className="ql-italic" />

@@ -1,5 +1,10 @@
 import { Fragment, useState } from 'react'
-import { CalendarMonth, KeyboardArrowUp, Person2 } from '@mui/icons-material'
+import {
+    CalendarMonth,
+    KeyboardArrowUp,
+    Person2,
+    Sell,
+} from '@mui/icons-material'
 import {
     Box,
     Breadcrumbs,
@@ -11,6 +16,7 @@ import {
 } from '@mui/material'
 import Image from 'mui-image'
 import { Link, useLoaderData, useParams } from 'react-router-dom'
+import HTMLReactParser from 'html-react-parser'
 
 import ScrollToTop from '@/components/common/ScollToTop'
 import Seo from '@/components/feature/Seo'
@@ -83,8 +89,10 @@ const DetailPost = () => {
                                     color="GrayText"
                                     variant="subtitle2"
                                     ml={1}
+                                    component="div"
                                 >
-                                    | #tag: {formatTagNames(tag)}
+                                    | <Sell fontSize="14px" />{' '}
+                                    {formatTagNames(tag)}
                                 </Typography>
                             </Stack>
                             <Stack direction="row">
@@ -109,9 +117,10 @@ const DetailPost = () => {
                             className="py-2"
                             variant="body1"
                             paragraph
+                            component="article"
                             textAlign="justify"
                         >
-                            {content}
+                            {HTMLReactParser(content)}
                         </Typography>
                     </Box>
 

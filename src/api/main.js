@@ -95,3 +95,12 @@ export const createCommentAPI = async (data, token) => {
     })
     return res.data
 }
+
+// Write
+export const createdPostAPI = async (payload, token) => {
+    return await mainAPI.post('/post/create', payload, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
+}

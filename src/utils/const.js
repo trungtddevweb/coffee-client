@@ -71,6 +71,22 @@ export const formats = [
 //
 export const listTags = [
     {
+        label: 'Thanh xuân',
+        value: 'youth',
+    },
+    {
+        label: 'Tâm sự',
+        value: 'sharing',
+    },
+    {
+        label: 'Học tập',
+        value: 'education',
+    },
+    {
+        label: 'Nghệ thuật',
+        value: 'art',
+    },
+    {
         label: 'Âm nhạc',
         value: 'music',
     },
@@ -78,10 +94,7 @@ export const listTags = [
         label: 'Công nghệ',
         value: 'technology',
     },
-    {
-        label: 'Tâm sự',
-        value: 'sharing',
-    },
+
     {
         label: 'Du lịch',
         value: 'traveling',
@@ -97,6 +110,14 @@ export const listTags = [
     {
         label: 'Thời trang',
         value: 'fashion',
+    },
+    {
+        label: 'Gia đình',
+        value: 'family',
+    },
+    {
+        label: 'Khác ',
+        value: 'other',
     },
 ]
 
