@@ -21,12 +21,13 @@ export const signInWithGoogleAPI = async (idToken) => {
 }
 
 export const signOutAPI = async (accessToken) => {
-    await mainAPI.post('/auth/sign-out', null, {
+    cookies.remove('jwt')
+
+    return await mainAPI.post('/auth/sign-out', null, {
         headers: {
             Authorization: `Bearer ${accessToken}`,
         },
     })
-    cookies.remove('jwt')
 }
 
 // POST

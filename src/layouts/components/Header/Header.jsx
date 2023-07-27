@@ -27,7 +27,7 @@ import MailIcon from '@mui/icons-material/Mail'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import styled from '@emotion/styled'
-import { Home } from '@mui/icons-material'
+import { Home, ManageAccounts } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -134,17 +134,19 @@ export default function Header(props) {
                     </IconButton>
                     <p>Thông báo</p>
                 </MenuItem>
-                <MenuItem onClick={handleMenuClose}>
-                    <IconButton
-                        aria-label="account of current user"
-                        aria-controls="primary-search-account-menu"
-                        aria-haspopup="true"
-                        color="inherit"
-                    >
-                        <AccountCircle color="disabled" />
-                    </IconButton>
-                    <p>Tài khoản</p>
-                </MenuItem>
+                <Link to="/settings">
+                    <MenuItem onClick={handleMenuClose}>
+                        <IconButton
+                            aria-label="account of current user"
+                            aria-controls="primary-search-account-menu"
+                            aria-haspopup="true"
+                            color="inherit"
+                        >
+                            <ManageAccounts color="success" />
+                        </IconButton>
+                        <p>Tài khoản</p>
+                    </MenuItem>
+                </Link>
             </Box>
         </Menu>
     )

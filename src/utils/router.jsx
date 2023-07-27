@@ -20,6 +20,8 @@ import {
     getTrendingLoader,
     getDetailLoader,
 } from './const'
+import Settings from '@/pages/Settings'
+import NoHeaderLayout from '@/layouts/NoHeaderLayout'
 
 const router = createBrowserRouter([
     {
@@ -80,6 +82,15 @@ const router = createBrowserRouter([
             {
                 path: 'write',
                 element: <Write />,
+            },
+        ],
+    },
+    {
+        element: <NoHeaderLayout />,
+        children: [
+            {
+                path: 'settings',
+                element: <Settings />,
             },
         ],
     },
