@@ -2773,13 +2773,6 @@ react-router@6.14.1:
   dependencies:
     "@remix-run/router" "1.7.1"
 
-react-snowfall@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.npmjs.org/react-snowfall/-/react-snowfall-1.2.1.tgz#68cab6a1d05aa7c3211bce96a3a97977ca7dc57f"
-  integrity sha512-d2UR3nDq3F0DJGaTfJ0QNbBo76UZHtT9wHFj+ePxAl4FgSxWBhxB/Bjn06f5iDBwhgwiZ7CZmv3lwfNvjo6a+w==
-  dependencies:
-    react-fast-compare "^3.2.0"
-
 react-social-login-buttons@^3.9.1:
   version "3.9.1"
   resolved "https://registry.npmjs.org/react-social-login-buttons/-/react-social-login-buttons-3.9.1.tgz#c0595ac314a09e4d6024134ff0cc9901879179ff"

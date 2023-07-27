@@ -33,13 +33,14 @@ const MenuSetting = () => {
     const classes = useStyles()
     const dispatch = useDispatch()
     const user = useSelector((state) => state.auth.user)
-    const { accessToken, avtUrl, name } = user
+    const { avtUrl, name, email } = user
     const handleSignOut = async () => {
         setLoading(true)
         try {
-            const response = await signOutAPI(accessToken)
+            const response = await signOutAPI()
             if (response.status === 200) {
                 dispatch(logoutSuccess())
+                localStorage.removeItem('token')
             }
             setLoading(false)
         } catch (error) {
@@ -64,7 +65,7 @@ const MenuSetting = () => {
                     <Box className={classes.flexBox} flexDirection="column">
                         <Typography variant="h6">{name}</Typography>
                         <Typography variant="caption" color="GrayText">
-                            example@gmail.com
+                            {email}
                         </Typography>
                     </Box>
                     <Button variant="contained" endIcon={<ArrowForwardIos />}>

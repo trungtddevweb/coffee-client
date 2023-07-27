@@ -12,7 +12,7 @@ import {
 import ReactQuill from 'react-quill'
 import { MuiFileInput } from 'mui-file-input'
 import { useState, Fragment } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import 'react-quill/dist/quill.snow.css'
 
 import background from '@/assets/images/write.jpg'
@@ -41,7 +41,6 @@ const Write = () => {
         tag: '',
     }
     const [value, setValue] = useState(initialState)
-    const accessToken = useSelector((state) => state.auth.user.accessToken)
     const [content, setContent] = useState('')
     const [image, setImage] = useState(null)
     const [loading, setLoading] = useState(false)
@@ -70,7 +69,7 @@ const Write = () => {
         formData.append('image', image)
         try {
             setLoading(true)
-            const response = await createdPostAPI(formData, accessToken)
+            const response = await createdPostAPI(formData)
             if (response.status === 201) {
                 setOpen(true)
                 setLoading(false)
@@ -101,7 +100,7 @@ const Write = () => {
         try {
             setLoading(true)
 
-            const response = await createdPostAPI(formData, accessToken)
+            const response = await createdPostAPI(formData)
             if (response.status === 201) {
                 dispatch(
                     showToast({

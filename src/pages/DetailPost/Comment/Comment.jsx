@@ -37,13 +37,10 @@ const Comment = ({ comments, postId, setComments }) => {
         if (trimmedValue === '') {
             return
         }
-        const response = await createCommentAPI(
-            {
-                content: trimmedValue,
-                postId,
-            },
-            accessToken
-        )
+        const response = await createCommentAPI({
+            content: trimmedValue,
+            postId,
+        })
         if (response.status === 'Success') {
             setComments([...comments, response.data])
             setCommentVal(' ')

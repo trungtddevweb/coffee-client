@@ -3,17 +3,15 @@ import CardItem from '@/components/common/CardItem'
 import Skeleton from '@/components/fallback/Skeleton'
 import { Box, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 
 const Liked = () => {
     const [loading, setLoading] = useState(true)
     const [posts, setPosts] = useState([])
-    const accessToken = useSelector((state) => state.auth.user.accessToken)
 
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const res = await getPostSavedAPI(accessToken)
+                const res = await getPostSavedAPI()
                 setLoading(false)
                 setPosts(res.data.docs)
             } catch (error) {
@@ -22,7 +20,7 @@ const Liked = () => {
             }
         }
         fetchPost()
-    }, [accessToken])
+    }, [])
 
     if (loading)
         return (

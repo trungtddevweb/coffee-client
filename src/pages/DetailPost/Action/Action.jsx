@@ -35,7 +35,7 @@ const Action = ({ likes, postId, comments }) => {
     const handleLike = async () => {
         if (accessToken) {
             try {
-                const res = await toggleLikePostAPI(postId, accessToken)
+                const res = await toggleLikePostAPI(postId)
                 if (res.status === 'Success') {
                     setLike(res.data.likes)
                 }
@@ -49,7 +49,7 @@ const Action = ({ likes, postId, comments }) => {
     }
     const handleSavePost = async () => {
         if (accessToken) {
-            const res = await addPostToSaveAPI(postId, accessToken)
+            const res = await addPostToSaveAPI(postId)
             if (res.status === 'Success') {
                 setSave(true)
                 dispatch(addSavedPosts(res.data))

@@ -4,13 +4,14 @@ import { Navigate, Outlet, ScrollRestoration } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import SpinnerAnimation from '@/components/fallback/Spinner'
+import { isAuthenticated } from '@/services/auth'
 
 const ProtectedLayout = () => {
     const checkLoggedIn = useSelector((state) => state.auth.isLoggedIn)
     const accessToken = useSelector((state) => state.auth.user.accessToken)
-    if (!checkLoggedIn || !accessToken)
+    if (!checkLoggedIn || !accessToken) {
         return <Navigate to="/sign-in" replace />
-
+    }
     return (
         <>
             <Header />
