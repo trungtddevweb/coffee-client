@@ -16,7 +16,6 @@ import {
 } from '@mui/material'
 import Image from 'mui-image'
 import { Link, useLoaderData, useParams } from 'react-router-dom'
-import HTMLReactParser from 'html-react-parser'
 
 import ScrollToTop from '@/components/common/ScollToTop'
 import Seo from '@/components/feature/Seo'
@@ -24,6 +23,7 @@ import { formatDate, formatTagNames } from '@/utils/format'
 import useStyles from '@/assets/styles'
 import Action from './Action'
 import Comment from './Comment'
+import DOMPurify from 'dompurify'
 
 const DetailPost = () => {
     const params = useParams()
@@ -33,7 +33,7 @@ const DetailPost = () => {
     const { author, content, createdAt, tag, likes, title, imagesUrl } =
         loader.data
 
-    // State
+    const safeHTML = DOMPurify.sanitize(content)
 
     return (
         <Fragment>
@@ -114,14 +114,12 @@ const DetailPost = () => {
                             sx={{ height: '3px' }}
                         />
                         <Typography
-                            className="py-2"
-                            variant="body1"
-                            paragraph
-                            component="article"
                             textAlign="justify"
-                        >
-                            {HTMLReactParser(content)}
-                        </Typography>
+                            component="article"
+                            dangerouslySetInnerHTML={{
+                                __html: safeHTML,
+                            }}
+                        ></Typography>
                     </Box>
 
                     <Divider component="div" />

@@ -26,6 +26,7 @@
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.9",
+    "dompurify": "^3.0.5",
     "html-react-parser": "^4.1.0",
     "jwt-decode": "^3.1.2",
     "mui-file-input": "^2.0.4",
