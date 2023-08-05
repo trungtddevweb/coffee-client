@@ -1,21 +1,18 @@
 import { Fragment, lazy } from 'react'
 import { Box } from '@mui/material'
 
-const RecentPosts = lazy(() => import('./RecentPosts'))
 import Seo from '@/components/feature/Seo'
 
 const Home = () => {
     return (
         <Fragment>
             <Seo
-                title="Coffee Sweet | Trang chủ"
-                description="Viết lên những câu chuyện của bạn"
+                title="Shoppp | Trang chủ"
+                description="Tadaaaa"
                 type="Web Application"
-                name="Coffee Sweet"
+                name="Shoppp"
             />
-            <Box className="px-2">
-                <RecentPosts />
-            </Box>
+            Home
         </Fragment>
     )
 }

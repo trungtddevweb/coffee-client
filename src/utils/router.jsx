@@ -4,23 +4,7 @@ import AuthLayout from '@/layouts/AuthLayout'
 import MainLayout from '@/layouts/MainLayout'
 import ProtectedLayout from '@/layouts/ProtectedLayout'
 
-import {
-    Error,
-    Home,
-    SignIn,
-    SignUp,
-    TagName,
-    DetailPost,
-    postLoader,
-    getRecentLoader,
-    Recent,
-    Trending,
-    Write,
-    Liked,
-    getTrendingLoader,
-    getDetailLoader,
-} from './const'
-import Settings from '@/pages/Settings'
+import { Error, Home, SignIn, SignUp } from './const'
 import NoHeaderLayout from '@/layouts/NoHeaderLayout'
 
 const router = createBrowserRouter([
@@ -32,26 +16,6 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Home />,
-            },
-            {
-                path: 'tags/:tagName',
-                element: <TagName />,
-                loader: postLoader,
-            },
-            {
-                path: 'tags/:tagName/:postId',
-                element: <DetailPost />,
-                loader: getDetailLoader,
-            },
-            {
-                path: 'trending',
-                element: <Trending />,
-                loader: getTrendingLoader,
-            },
-            {
-                path: 'recent',
-                element: <Recent />,
-                loader: getRecentLoader,
             },
         ],
     },
@@ -75,14 +39,6 @@ const router = createBrowserRouter([
                 path: 'manager/:username',
                 element: <div>Setting</div>,
             },
-            {
-                path: 'store/saved',
-                element: <Liked />,
-            },
-            {
-                path: 'write',
-                element: <Write />,
-            },
         ],
     },
     {
@@ -90,7 +46,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: 'settings',
-                element: <Settings />,
+                element: <div>Page</div>,
             },
         ],
     },
